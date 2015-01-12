@@ -9,18 +9,18 @@ $(function() {
 });
 
 fixSize = (function() {
-  var sidebarWidth, wh;
+  var lowerSignPos, wh;
   wh = window.innerHeight;
-  sidebarWidth = wh * 264 / 420;
-  $('.img-interior').css({
-    height: wh
-  });
-  $('.main-area').css({
-    'margin-left': sidebarWidth + 'px'
-  });
-  $('.nav').css({
-    left: sidebarWidth
-  });
+  lowerSignPos = $('.row3 h3').position().top + $('.row3').height();
+  if (lowerSignPos + 60 < wh) {
+    $('.slide1').css({
+      height: wh
+    });
+  } else {
+    $('.slide1').css({
+      height: 'auto'
+    });
+  }
   calcWidthOrHeight();
 });
 
