@@ -83,6 +83,9 @@ $(function() {
     mouseWheel: true,
     click: true
   });
+  $('.link-programm').on('click', function() {
+    return myScroll.scrollToElement(document.querySelector('.slide2'));
+  });
   $('.link-teacher').on('click', function() {
     return myScroll.scrollToElement(document.querySelector('.slide3'));
   });
