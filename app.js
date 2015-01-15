@@ -3,9 +3,55 @@ require('./util');
 
 require('./loader');
 
+require('./calc-sqr-block');
 
 
-},{"./loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee":[function(require,module,exports){
+
+},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
+$(function() {
+  var arrangePictures;
+  arrangePictures = (function() {
+    var areaWidth, areaWidthFunc, columnNums, maxY;
+    areaWidthFunc = function() {
+      return $('.slide2 .container').width();
+    };
+    areaWidth = areaWidthFunc();
+    columnNums = (function() {
+      switch (false) {
+        case !(window.innerWidth >= 700):
+          return 2;
+        default:
+          return 1;
+      }
+    })();
+    maxY = 0;
+    $('.slide2 .sqr-block').each(function(index, el) {
+      var col, picWidth, row, upperEl, upperElBottom;
+      picWidth = areaWidth / columnNums;
+      row = Math.floor(index / columnNums);
+      col = index - row * columnNums;
+      if (index > columnNums - 1) {
+        upperEl = $('.slide2 .sqr-block').eq(index - columnNums);
+        upperElBottom = upperEl.position().top + upperEl.innerHeight();
+      } else {
+        upperElBottom = 0;
+      }
+      $(el).css({
+        width: picWidth
+      }).css('left', picWidth * col).css('top', upperElBottom);
+      maxY = Math.max(maxY, $(el).position().top + $(el).innerHeight());
+    });
+    $('.slide2 .container').css('height', maxY + 50);
+  });
+  arrangePictures();
+  return $(window).on('resize', (function() {
+    arrangePictures();
+  }));
+});
+
+
+
+},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee":[function(require,module,exports){
 $(function() {
   $('#hideAll .loader').css({
     marginTop: window.innerHeight * 0.4
