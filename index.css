@@ -254,6 +254,10 @@ html {
   color: white;
 }
 .main-area .slide2 .container .sqr-block:nth-of-type(5) {
+  background-color: #d64226;
+  color: white;
+}
+.main-area .slide2 .container .sqr-block:nth-of-type(6) {
   background-color: #29bcbd;
 }
 .main-area .slide2 .container .sqr-block h3 {

@@ -11,7 +11,7 @@ require('./calc-sqr-block');
 $(function() {
   var arrangePictures;
   arrangePictures = (function() {
-    var areaWidth, areaWidthFunc, columnNums, maxY;
+    var areaWidth, areaWidthFunc, columnNums, delta, maxY, preLastEl;
     areaWidthFunc = function() {
       return $('.slide2 .container').width();
     };
@@ -25,6 +25,10 @@ $(function() {
       }
     })();
     maxY = 0;
+    preLastEl = $('.slide2 .sqr-block')[4];
+    $(preLastEl).css({
+      height: 'auto'
+    });
     $('.slide2 .sqr-block').each(function(index, el) {
       var col, picWidth, row, upperEl, upperElBottom;
       picWidth = areaWidth / columnNums;
@@ -42,6 +46,11 @@ $(function() {
       maxY = Math.max(maxY, $(el).position().top + $(el).innerHeight());
     });
     $('.slide2 .container').css('height', maxY + 50);
+    preLastEl = $('.slide2 .sqr-block')[4];
+    delta = maxY - ($(preLastEl).position().top + $(preLastEl).innerHeight());
+    $(preLastEl).css({
+      height: $(preLastEl).innerHeight() + delta
+    });
   });
   arrangePictures();
   return $(window).on('resize', (function() {
