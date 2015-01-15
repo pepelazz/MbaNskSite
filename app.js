@@ -5,9 +5,11 @@ require('./loader');
 
 require('./calc-sqr-block');
 
+require('./scroll');
 
 
-},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
+
+},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee","./scroll":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
 $(function() {
   var arrangePictures;
   arrangePictures = (function() {
@@ -69,6 +71,23 @@ $(function() {
     return $('#hideAll').css({
       display: 'none'
     });
+  });
+});
+
+
+
+},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee":[function(require,module,exports){
+$(function() {
+  var myScroll;
+  myScroll = new IScroll('#scroller-body', {
+    mouseWheel: true,
+    click: true
+  });
+  $('.link-teacher').on('click', function() {
+    return myScroll.scrollToElement(document.querySelector('.slide3'));
+  });
+  return $('.link-home').on('click', function() {
+    return myScroll.scrollToElement(document.querySelector('.logo'));
   });
 });
 
