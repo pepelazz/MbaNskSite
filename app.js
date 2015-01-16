@@ -92,8 +92,11 @@ $(function() {
   $('.link-teacher').on('click', function() {
     return myScroll.scrollToElement(document.querySelector('.slide3'));
   });
-  return $('.link-facts').on('click', function() {
+  $('.link-facts').on('click', function() {
     return myScroll.scrollToElement(document.querySelector('.slide4'));
+  });
+  return $('.link-mention').on('click', function() {
+    return myScroll.scrollToElement(document.querySelector('.slide5'));
   });
 });
 
