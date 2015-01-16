@@ -83,14 +83,17 @@ $(function() {
     mouseWheel: true,
     click: true
   });
+  $('.link-home').on('click', function() {
+    return myScroll.scrollToElement(document.querySelector('.logo'));
+  });
   $('.link-programm').on('click', function() {
     return myScroll.scrollToElement(document.querySelector('.slide2'));
   });
   $('.link-teacher').on('click', function() {
     return myScroll.scrollToElement(document.querySelector('.slide3'));
   });
-  return $('.link-home').on('click', function() {
-    return myScroll.scrollToElement(document.querySelector('.logo'));
+  return $('.link-facts').on('click', function() {
+    return myScroll.scrollToElement(document.querySelector('.slide4'));
   });
 });
 
