@@ -7,9 +7,11 @@ require('./calc-sqr-block');
 
 require('./scroll');
 
+require('./test-guestlistmodel');
 
 
-},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee","./scroll":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
+
+},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee","./scroll":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee","./test-guestlistmodel":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/test-guestlistmodel.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
 $(function() {
   var arrangePictures;
   arrangePictures = (function() {
@@ -81,6 +83,7 @@ $(function() {
   var myScroll;
   myScroll = new IScroll('#scroller-body', {
     mouseWheel: true,
+    keyBindings: true,
     click: true
   });
   $('.link-home').on('click', function() {
@@ -99,6 +102,19 @@ $(function() {
     return myScroll.scrollToElement(document.querySelector('.slide5'));
   });
 });
+
+
+
+},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/test-guestlistmodel.coffee":[function(require,module,exports){
+var api;
+
+api = {
+  load: function() {
+    return ['Alex', 'John', 'Mary'];
+  }
+};
+
+console.log(api.load());
 
 
 
