@@ -198,7 +198,7 @@ fixSize = (function() {
     });
   }
   calcWidthOrHeight();
-  setTimeout(calcTitleHeight, 100);
+  setTimeout(calcTitleHeight, 300);
 });
 
 calcWidthOrHeight = (function() {
@@ -232,7 +232,6 @@ calcTitleHeight = (function() {
   var cardHeight, title, titleArr;
   title = $('.person-card .title');
   cardHeight = $('.person-card').height();
-  console.log(cardHeight, title.position().top);
   titleArr = $('.person-info .title').css({
     height: cardHeight - title.position().top - 10
   });
