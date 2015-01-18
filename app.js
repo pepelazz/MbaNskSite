@@ -1,23 +1,25 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"./src/javascript/app.coffee":[function(require,module,exports){
 require('./util');
 
-require('./loader');
-
 require('./calc-sqr-block');
 
 require('./scroll');
 
-require('./test-guestlistmodel');
+require('./map');
+
+require('./simple-func/loader');
+
+require('./simple-func/toggle-menu');
 
 
 
-},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee","./scroll":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee","./test-guestlistmodel":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/test-guestlistmodel.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
+},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./map":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/map.coffee","./scroll":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee","./simple-func/loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/simple-func/loader.coffee","./simple-func/toggle-menu":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/simple-func/toggle-menu.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
 $(function() {
   var arrangePictures;
   arrangePictures = (function() {
     var areaWidth, areaWidthFunc, columnNums, delta, maxY, preLastEl;
     areaWidthFunc = function() {
-      return $('.slide2 .container').width();
+      return $('.slide2 .container').innerWidth();
     };
     areaWidth = areaWidthFunc();
     columnNums = (function() {
@@ -64,23 +66,47 @@ $(function() {
 
 
 
-},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/loader.coffee":[function(require,module,exports){
-$(function() {
-  $('#hideAll .loader').css({
-    marginTop: window.innerHeight * 0.4
+},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/map.coffee":[function(require,module,exports){
+var init;
+
+init = (function() {
+  var HintLayout, myMap, myPlacemark;
+  myMap = new ymaps.Map("map", {
+    center: [54.845214, 83.092394],
+    zoom: 13,
+    controls: ['smallMapDefaultSet']
   });
-  return $(window).load(function() {
-    return $('#hideAll').css({
-      display: 'none'
-    });
+  myMap.behaviors.disable('scrollZoom');
+  HintLayout = ymaps.templateLayoutFactory.createClass("<div class='my-hint'>" + "<b>{{ properties.title }}</b><br />" + "{{ properties.address }}<br />" + "{{ properties.phone1 }}<br />" + "{{ properties.phone2 }}<br />" + "</div>", {
+    getShape: function() {
+      var el, firstChild, result;
+      el = this.getElement();
+      result = null;
+      if (el) {
+        firstChild = el.firstChild;
+        result = new ymaps.shape.Rectangle(new ymaps.geometry.pixel.Rectangle([[0, 0], [firstChild.offsetWidth, firstChild.offsetHeight]]));
+      }
+      return result;
+    }
   });
+  myPlacemark = new ymaps.Placemark([54.845214, 83.092394], {
+    title: "Центр дополнительного образования",
+    address: "ул. Пирогова, 4",
+    phone1: "+7 383 363 4018",
+    phone2: "+7 383 363 4110"
+  }, {
+    hintLayout: HintLayout
+  });
+  myMap.geoObjects.add(myPlacemark);
 });
+
+ymaps.ready(init);
 
 
 
 },{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee":[function(require,module,exports){
 $(function() {
-  var myScroll;
+  var myScroll, titleArr;
   myScroll = new IScroll('#scroller-body', {
     mouseWheel: true,
     keyBindings: true,
@@ -98,28 +124,58 @@ $(function() {
   $('.link-facts').on('click', function() {
     return myScroll.scrollToElement(document.querySelector('.slide4'));
   });
-  return $('.link-mention').on('click', function() {
+  $('.link-mentions').on('click', function() {
     return myScroll.scrollToElement(document.querySelector('.slide5'));
+  });
+  $('.link-contacts').on('click', function() {
+    return myScroll.scrollToElement(document.querySelector('.slide6'));
+  });
+  titleArr = $('.person-info .title-scroller');
+  titleArr.each(function(index) {
+    var titleScroll;
+    return titleScroll = new IScroll(titleArr.get(index), {
+      mouseWheel: true,
+      keyBindings: true,
+      click: true
+    });
+  });
+  return $('.btn-further').on('click', function() {
+    $(this).html($(this).text() === 'далее' ? 'скрыть' : 'далее');
+    $(this).next('.mention-further').toggleClass('show');
+    return myScroll.refresh();
   });
 });
 
 
 
-},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/test-guestlistmodel.coffee":[function(require,module,exports){
-var api;
+},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/simple-func/loader.coffee":[function(require,module,exports){
+$(function() {
+  $('#hideAll .loader').css({
+    marginTop: window.innerHeight * 0.4
+  });
+  return $(window).load(function() {
+    return $('#hideAll').css({
+      display: 'none'
+    });
+  });
+});
 
-api = {
-  load: function() {
-    return ['Alex', 'John', 'Mary'];
-  }
-};
 
-console.log(api.load());
+
+},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/simple-func/toggle-menu.coffee":[function(require,module,exports){
+$(function() {
+  $('.menu-icon').on('click', function() {
+    return $('.menu-wrapper .menu').toggleClass('show');
+  });
+  return $('.menu > li').on('click', function() {
+    return $('.menu-wrapper .menu').removeClass('show');
+  });
+});
 
 
 
 },{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee":[function(require,module,exports){
-var calcWidthOrHeight, fixSize;
+var calcTitleHeight, calcWidthOrHeight, fixSize;
 
 $(function() {
   fixSize();
@@ -142,6 +198,7 @@ fixSize = (function() {
     });
   }
   calcWidthOrHeight();
+  calcTitleHeight();
 });
 
 calcWidthOrHeight = (function() {
@@ -169,6 +226,15 @@ calcWidthOrHeight = (function() {
       width: 'auto'
     });
   }
+});
+
+calcTitleHeight = (function() {
+  var cardHeight, title, titleArr;
+  title = $('.person-card .title');
+  cardHeight = $('.person-card').height();
+  titleArr = $('.person-info .title').css({
+    height: cardHeight - title.position().top - 10
+  });
 });
 
 
