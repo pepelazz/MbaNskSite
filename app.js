@@ -175,7 +175,7 @@ $(function() {
 
 
 },{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee":[function(require,module,exports){
-var calcTitleHeight, calcWidthOrHeight, fixSize;
+var calcWidthOrHeight, fixSize;
 
 $(function() {
   fixSize();
@@ -198,7 +198,6 @@ fixSize = (function() {
     });
   }
   calcWidthOrHeight();
-  setTimeout(calcTitleHeight, 300);
 });
 
 calcWidthOrHeight = (function() {
@@ -226,15 +225,6 @@ calcWidthOrHeight = (function() {
       width: 'auto'
     });
   }
-});
-
-calcTitleHeight = (function() {
-  var cardHeight, title, titleArr;
-  title = $('.person-card .title');
-  cardHeight = $('.person-card').height();
-  titleArr = $('.person-info .title').css({
-    height: cardHeight - title.position().top - 10
-  });
 });
 
 
