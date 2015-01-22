@@ -11,9 +11,11 @@ require('./simple-func/loader');
 
 require('./simple-func/toggle-menu');
 
+require('./gallery');
 
 
-},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./map":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/map.coffee","./scroll":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee","./simple-func/loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/simple-func/loader.coffee","./simple-func/toggle-menu":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/simple-func/toggle-menu.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
+
+},{"./calc-sqr-block":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee","./gallery":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/gallery.coffee","./map":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/map.coffee","./scroll":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee","./simple-func/loader":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/simple-func/loader.coffee","./simple-func/toggle-menu":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/simple-func/toggle-menu.coffee","./util":"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee"}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/calc-sqr-block.coffee":[function(require,module,exports){
 $(function() {
   var arrangePictures;
   arrangePictures = (function() {
@@ -66,6 +68,41 @@ $(function() {
 
 
 
+},{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/gallery.coffee":[function(require,module,exports){
+$(function() {
+  var openPhotoSwipe, pictures;
+  pictures = [];
+  $('.gallery figure').each(function(index) {
+    var linkEl;
+    linkEl = $('a', this);
+    pictures.push({
+      src: linkEl.attr('href'),
+      w: linkEl.attr('data-width'),
+      h: linkEl.attr('data-height')
+    });
+    return linkEl.on('click', function(e) {
+      console.log($(this).attr('data-index'));
+      e.preventDefault();
+      return openPhotoSwipe($(this).attr('data-index'));
+    });
+  });
+  return openPhotoSwipe = (function(index) {
+    var gallery, options, pswpElement;
+    pswpElement = document.querySelectorAll('.pswp')[0];
+    options = {
+      index: +index,
+      history: false,
+      focus: false,
+      showAnimationDuration: 0,
+      hideAnimationDuration: 0
+    };
+    gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, pictures, options);
+    gallery.init();
+  });
+});
+
+
+
 },{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/map.coffee":[function(require,module,exports){
 var init;
 
@@ -106,7 +143,7 @@ ymaps.ready(init);
 
 },{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/scroll.coffee":[function(require,module,exports){
 $(function() {
-  var myScroll, titleArr;
+  var myScroll;
   myScroll = new IScroll('#scroller-body', {
     mouseWheel: true,
     keyBindings: true,
@@ -130,14 +167,12 @@ $(function() {
   $('.link-contacts').on('click', function() {
     return myScroll.scrollToElement(document.querySelector('.slide6'));
   });
-  titleArr = $('.person-info .title-scroller');
-  titleArr.each(function(index) {
-    var titleScroll;
-    return titleScroll = new IScroll(titleArr.get(index), {
-      mouseWheel: true,
-      keyBindings: true,
-      click: true
-    });
+  myScroll.on('scrollEnd', function() {
+    if (this.y * (-1) > window.innerHeight) {
+      return $('.link-to-cne').addClass('show');
+    } else {
+      return $('.link-to-cne').removeClass('show');
+    }
   });
   return $('.btn-further').on('click', function() {
     $(this).html($(this).text() === 'далее' ? 'скрыть' : 'далее');
