@@ -689,10 +689,10 @@ html {
 .link-to-cne {
   display: none;
   position: fixed;
-  right: 0;
+  right: 4px;
   top: 30%;
   z-index: 1000;
-  padding: 0.2rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 5px;
   background-color: red;
   -webkit-transform: translateX(46%) rotate(-90deg);
