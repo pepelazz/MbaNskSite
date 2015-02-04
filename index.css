@@ -255,7 +255,7 @@ html {
   width: 49.15254%;
   float: left;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .main-area .slide1 .row2 .col1 {
     width: 100%;
     float: left;
@@ -274,7 +274,7 @@ html {
   float: left;
   clear: both;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .main-area .slide1 .row3 .col1 {
     width: 100%;
     float: left;
@@ -320,7 +320,7 @@ html {
     width: auto;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .main-area .slide1 .img-handi img {
     display: none;
   }

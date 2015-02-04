@@ -210,7 +210,7 @@ $(function() {
 
 
 },{}],"/Users/Trikster/static_sites/MbaNsk/_MbaNsk/src/javascript/util.coffee":[function(require,module,exports){
-var calcWidthOrHeight, fixSize;
+var calcHandiImg, calcWidthOrHeight, fixSize;
 
 $(function() {
   fixSize();
@@ -233,6 +233,7 @@ fixSize = (function() {
     });
   }
   calcWidthOrHeight();
+  calcHandiImg();
 });
 
 calcWidthOrHeight = (function() {
@@ -260,6 +261,20 @@ calcWidthOrHeight = (function() {
       width: 'auto'
     });
   }
+});
+
+calcHandiImg = (function() {
+  var $img, $leftTitle, $topTitle, leftTitleRight, topTitleBottom;
+  $topTitle = $('.slide1 .row1 .col2 h3');
+  $leftTitle = $('.slide1 .row3 .col1');
+  topTitleBottom = $topTitle.offset().top + $topTitle.height();
+  leftTitleRight = $leftTitle.offset().left + $leftTitle.width();
+  $img = $('.img-handi img');
+  $($img).css({
+    height: window.innerHeight - topTitleBottom
+  }).css({
+    width: 'auto'
+  });
 });
 
 
